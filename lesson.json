@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "id": "git-environment",
+  "revision": "v1.0.0",
+  "title": "개발환경과 Git의 첫 흐름",
+  "description": "파일을 실행하고 변경 이력을 원격에 남겨요.",
+  "sources": [
+    "https://slog.gg/p/14148"
+  ],
+  "sections": [
+    {
+      "id": "reading-1",
+      "title": "실행 도구와 작업 폴더",
+      "body": "JDK 25, Git, Node.js를 설치하세요.\n웹 실습에는 Microsoft Edge도 사용해요.\n터미널에서 버전을 먼저 확인하세요.\n\n```shell\njava --version\njavac --version\ngit --version\nnode --version\n```\n\n자바와 javac의 주 버전은 25여야 해요.\n명령을 못 찾으면 설치 경로를 확인하세요.\n실습 실행은 새 임시 폴더에서 이뤄져요.\n각 문제는 앞 문제의 파일에 의존하지 않아요.\n\n개인 연습에서는 빈 프로젝트 폴더를 만드세요.\n그 폴더를 편집기로 열고 Main.java를 저장해요.\n터미널의 현재 위치도 같은 폴더여야 하죠.\n"
+    },
+    {
+      "id": "reading-2",
+      "title": "저장·스테이징·커밋·push",
+      "body": "Git은 파일의 변경 이력을 관리해요.\n저장만 하면 Git 이력에는 아직 남지 않아요.\n먼저 파일 하나를 만들고 상태를 확인할게요.\n\n```shell\ngit init -b main work\ncd work\nprintf 'Java backend\\n' > README.md\ngit status --short\n```\n\n새 파일은 아직 추적하지 않는 상태예요.\n이제 커밋할 파일을 고르고 이력을 남겨요.\n\n```shell\ngit add README.md\ngit commit -m 'start course'\ngit log --oneline\n```\n\n커밋 뒤에는 메시지와 커밋 ID가 보여요.\nID는 실행할 때마다 달라질 수 있어요.\n조심하세요. 커밋은 원격 전송이 아니에요.\norigin을 연결하고 push해야 원격에도 남아요.\n이 실습의 remote.git은 로컬 원격이에요.\n실제 GitHub 연습은 빈 공개 리포에서 해보세요.\n비밀번호나 접근 토큰은 커밋하지 마세요.\n"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "first-commit",
+      "title": "작업 폴더와 첫 커밋",
+      "goal": "`work` 폴더에 main 브랜치 저장소를 만드세요.\nREADME.md에 `Java backend`와 줄바꿈을 저장하세요.\n`start course`라는 메시지로 커밋하세요.",
+      "language": "git",
+      "entry_file": "practice.sh",
+      "starter_code": "set -e\n# 여기에 Git 명령을 작성하세요.\n",
+      "solution": "# 명령 하나가 실패하면 다음 작업을 멈춰요.\nset -e\n# 매 실습은 빈 폴더에서 시작해요.\ngit init -b main work\ncd work\n# 파일 저장과 커밋은 서로 다른 일이에요.\nprintf 'Java backend\\n' > README.md\ngit add README.md\n# 스테이징한 파일을 이력으로 남겨요.\ngit commit -m 'start course'\n",
+      "files": {},
+      "tests": [],
+      "web_checks": [],
+      "mutations": [],
+      "required": true,
+      "narration": [
+        {
+          "action": "say",
+          "target": "problem",
+          "text": "`work` 폴더에 main 브랜치 저장소를 만드세요.\nREADME.md에 `Java backend`와 줄바꿈을 저장하세요.\n`start course`라는 메시지로 커밋하세요."
+        },
+        {
+          "action": "say",
+          "target": "editor",
+          "text": "조심하세요. 실행 성공과 모든 검사 통과는 달라요. 단계마다 결과를 확인해요."
+        },
+        {
+          "action": "set_code",
+          "code": "set -e\ngit init -b main work\ngit -C work status --short\n",
+          "say": "먼저 빈 저장소를 만들고 상태를 확인해요."
+        },
+        {
+          "action": "run"
+        },
+        {
+          "action": "say",
+          "target": "output",
+          "text": "저장소 초기화 결과를 확인하세요. 아직 커밋한 파일은 없어요."
+        },
+        {
+          "action": "set_code",
+          "code": "# 명령 하나가 실패하면 다음 작업을 멈춰요.\nset -e\n# 매 실습은 빈 폴더에서 시작해요.\ngit init -b main work\ncd work\n# 파일 저장과 커밋은 서로 다른 일이에요.\nprintf 'Java backend\\n' > README.md\ngit add README.md\n# 스테이징한 파일을 이력으로 남겨요.\ngit commit -m 'start course'\n",
+          "say": "이제 파일을 저장하고 커밋을 남겨요."
+        },
+        {
+          "action": "run"
+        },
+        {
+          "action": "say",
+          "target": "output",
+          "text": "실행 결과를 읽어보세요. 아직 남은 검사와 통과한 검사를 비교해요."
+        }
+      ],
+      "git_checks": {
+        "minimum_commits": 1,
+        "head_message": "start course",
+        "tracked_files": {
+          "README.md": "Java backend\n"
+        },
+        "branch": "main",
+        "pushed": false
+      },
+      "source_hash": "50e7baf51485704242311ff67364ad98e2578e89175276e15c0d5568be4be636"
+    },
+    {
+      "id": "remote-history",
+      "title": "수정 이력을 원격으로 보내기",
+      "goal": "첫 실습과 같은 저장소를 새로 만드세요.\n첫 커밋 뒤 README.md에 `Learning Git`을 추가하세요.\n둘째 커밋 메시지는 `add learning plan`이에요.\n제공한 `../remote.git`을 origin으로 연결하세요.\nmain 브랜치를 push하세요.",
+      "language": "git",
+      "entry_file": "practice.sh",
+      "starter_code": "set -e\n# 여기에 Git 명령을 작성하세요.\n",
+      "solution": "set -e\n# 앞 문제의 작업 폴더를 재사용하지 않아요.\ngit init -b main work\ncd work\nprintf 'Java backend\\n' > README.md\ngit add README.md\ngit commit -m 'start course'\n# 수정한 내용도 다시 스테이징해야 해요.\nprintf 'Learning Git\\n' >> README.md\ngit add README.md\ngit commit -m 'add learning plan'\n# 이 원격은 실습용 로컬 저장소예요.\ngit remote add origin ../remote.git\ngit push -u origin main\n",
+      "files": {},
+      "tests": [],
+      "web_checks": [],
+      "mutations": [],
+      "required": true,
+      "narration": [
+        {
+          "action": "say",
+          "target": "problem",
+          "text": "첫 실습과 같은 저장소를 새로 만드세요.\n첫 커밋 뒤 README.md에 `Learning Git`을 추가하세요.\n둘째 커밋 메시지는 `add learning plan`이에요.\n제공한 `../remote.git`을 origin으로 연결하세요.\nmain 브랜치를 push하세요."
+        },
+        {
+          "action": "say",
+          "target": "editor",
+          "text": "조심하세요. 실행 성공과 모든 검사 통과는 달라요. 단계마다 결과를 확인해요."
+        },
+        {
+          "action": "set_code",
+          "code": "set -e\ngit init -b main work\ngit -C work status --short\n",
+          "say": "먼저 빈 저장소를 만들고 상태를 확인해요."
+        },
+        {
+          "action": "run"
+        },
+        {
+          "action": "say",
+          "target": "output",
+          "text": "저장소 초기화 결과를 확인하세요. 아직 커밋한 파일은 없어요."
+        },
+        {
+          "action": "set_code",
+          "code": "set -e\n# 앞 문제의 작업 폴더를 재사용하지 않아요.\ngit init -b main work\ncd work\nprintf 'Java backend\\n' > README.md\ngit add README.md\ngit commit -m 'start course'\n# 수정한 내용도 다시 스테이징해야 해요.\nprintf 'Learning Git\\n' >> README.md\ngit add README.md\ngit commit -m 'add learning plan'\n# 이 원격은 실습용 로컬 저장소예요.\ngit remote add origin ../remote.git\ngit push -u origin main\n",
+          "say": "이제 파일을 저장하고 커밋을 남겨요."
+        },
+        {
+          "action": "run"
+        },
+        {
+          "action": "say",
+          "target": "output",
+          "text": "실행 결과를 읽어보세요. 아직 남은 검사와 통과한 검사를 비교해요."
+        }
+      ],
+      "git_checks": {
+        "minimum_commits": 2,
+        "head_message": "add learning plan",
+        "tracked_files": {
+          "README.md": "Java backend\nLearning Git\n"
+        },
+        "branch": "main",
+        "pushed": true
+      },
+      "source_hash": "eea6cd688891deac506f54fc6e5ac381fab4bc69b4ef90435824a00984134437"
+    }
+  ]
+}
